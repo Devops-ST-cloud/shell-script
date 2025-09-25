@@ -13,6 +13,17 @@ if [ $USERID -ne 0 ]
       echo "you are super user"
 fi
 
+VALIDATE(){
+
+   if [ $1 -ne 0 ]
+     then 
+         echo "$2.... failure"
+         exit 1
+     else  
+         echo "$2.... success"
+   fi     
+}
+
 for i in $@
 do 
    echo "package install:: $i"
@@ -21,6 +32,7 @@ do
    then
        echo "$i already installed"
     else
-        echo "$i not installed ... need to install"
+        dnf install $i -y &>>$LOGFILE
+        VALIDATE $? "Install $i"
     fi       
 done   
