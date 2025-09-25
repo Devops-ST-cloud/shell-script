@@ -9,4 +9,7 @@ if [ $USERID -ne 0 ]
       echo "you are super user"
 fi
 
-echo "All Packages :: $@"
+for i in $@
+do 
+   echo "package install:: $i"
+done   
